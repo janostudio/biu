@@ -1,2 +1,11 @@
 # biu
-This is a front-end framework based on MVVM.
+This is a reactive front-end framework.
+
+## usage
+
+```sh
+npm run dev
+
+npm run build
+```
+

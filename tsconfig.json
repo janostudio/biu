@@ -1,0 +1,13 @@
+{
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "target": "es5",
+    "lib": ["es2015", "es2017", "dom"],
+    "types": ["node"],
+    "outDir": "dist",
+    "plugins": [{ "name": "tslint-language-service" }]
+  }
+}
