@@ -7,7 +7,7 @@ import replace from "rollup-plugin-replace";
 
 export default [
   {
-    input: "src/index.ts",
+    input: "example/example.ts",
     output: {
       file: "example/index.js",
       format: "umd",

@@ -10,7 +10,8 @@
   "search.exclude": {
     "**/node_modules/": true,
     "**/build/": true,
-    "**/dist/": true
+    "**/dist/": true,
+    "**/example/": true
   },
   "typescript.tsdk": "./node_modules/typescript/lib",
   "tslint.autoFixOnSave": true,
