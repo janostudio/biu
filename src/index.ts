@@ -1,3 +1,6 @@
+/**
+ * Dep订阅器 Watcher（Dep.target）订阅对象
+ */
 interface Sub {
   update: Function;
 }
@@ -19,6 +22,8 @@ class Dep {
     });
   }
 }
+
+Dep.target = null;
 
 class Watcher {
   constructor() {
@@ -57,8 +62,6 @@ function defineReactive(obj, key, val) {
     }
   });
 }
-
-Dep.target = null;
 
 export default class Biu {
   _data: any;

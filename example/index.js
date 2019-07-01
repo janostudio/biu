@@ -5,6 +5,30 @@
   factory();
 }(function () { 'use strict';
 
+  var Dep = /** @class */ (function () {
+      function Dep() {
+          this.subs = [];
+      }
+      Dep.prototype.addSub = function (sub) {
+          this.subs.push(sub);
+      };
+      Dep.prototype.notify = function () {
+          this.subs.forEach(function (sub) {
+              sub.update();
+          });
+      };
+      return Dep;
+  }());
+  Dep.target = null;
+  var Watcher = /** @class */ (function () {
+      function Watcher() {
+          Dep.target = this;
+      }
+      Watcher.prototype.update = function () {
+          console.log("视图更新啦～");
+      };
+      return Watcher;
+  }());
   function observer(value) {
       if (!value || typeof value !== "object") {
           return;
@@ -13,21 +37,20 @@
           defineReactive(value, key, value[key]);
       });
   }
-  function cb(val) {
-      console.log("视图更新啦～", val);
-  }
   function defineReactive(obj, key, val) {
+      var dep = new Dep();
       Object.defineProperty(obj, key, {
           enumerable: true,
           configurable: true,
           get: function reactiveGetter() {
+              dep.addSub(Dep.target);
               return val;
           },
           set: function reactiveSetter(newVal) {
               if (newVal === val)
                   return;
               val = newVal;
-              cb(newVal);
+              dep.notify();
           }
       });
   }
@@ -35,6 +58,8 @@
       function Biu(options) {
           this._data = options.data;
           observer(this._data);
+          new Watcher();
+          console.log("render~", this._data.test);
       }
       return Biu;
   }());
@@ -44,7 +69,7 @@
           test: "I am test."
       }
   });
-  // o._data.test = "hello,test.";
+  o._data.test = "hello,test.";
 
 }));
 //# sourceMappingURL=index.js.map
